@@ -26,18 +26,29 @@ function App() {
     headers: { 'Content-Type': 'application/json' }
   });
   if (response.ok) {
-    setMovies([...movies, movie]);
+     const savedMovie = await response.json();
+    setMovies((prev) => [...prev, savedMovie]);
     setAddingMovie(false);
   }
-}   
+}  
+
+async function handleDeleteMovie(movieId) {
+    const response = await fetch(`/movies/${movieId}`, {
+        method: 'DELETE',
+    });
+    if (response.ok) {
+        const nextMovies = movies.filter(m => m.id !== movieId);
+        setMovies(nextMovies);
+    }
+}
+
     return (
         <div className="container">
             <h1>My favourite movies to watch</h1>
             {movies.length === 0
                 ? <p>No movies yet. Maybe add something?</p>
-                : <MoviesList movies={movies}
-                              onDeleteMovie={(movie) => setMovies(movies.filter(m => m !== movie))}
-                />}
+                : <MoviesList movies={movies} onDeleteMovie={handleDeleteMovie}/>}
+
             {addingMovie
                 ? <MovieForm onMovieSubmit={handleAddMovie}
                              buttonLabel="Add a movie"
