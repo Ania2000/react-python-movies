@@ -1,16 +1,32 @@
-export default function MovieListItem(props) {
-    return (
-        <div>
-            <div>
-                <strong>{props.movie.title}</strong>
-                {' '}
-                <span>({props.movie.year})</span>
-                {' '}
-                directed by {props.movie.director}
-                {' '}
-                <a onClick={props.onDelete}>Delete</a>
-            </div>
-            {props.movie.description}
-        </div>
-    );
+import MovieActors from "./MovieActors";
+
+export default function MovieListItem({
+  movie,
+  onDelete,
+  allActors,
+  onAssignActor,
+  onUnassignActor
+}) {
+  return (
+    <div>
+      <div>
+        <strong>{movie.title}</strong> ({movie.year})
+
+        <button
+          type="button"
+          onClick={onDelete}
+          style={{ marginLeft: 10 }}
+        >
+          Usuń film
+        </button>
+      </div>
+
+      <MovieActors
+        movie={movie}
+        allActors={allActors}
+        onAssignActor={onAssignActor}
+        onUnassignActor={onUnassignActor}
+      />
+    </div>
+  );
 }

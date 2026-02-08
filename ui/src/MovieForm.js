@@ -1,4 +1,5 @@
 import { useState } from "react";
+import LoadingButtons from "./LoadingButtons";
 
 export default function MovieForm(props) {
     const [title, setTitle] = useState('');
@@ -36,8 +37,6 @@ export default function MovieForm(props) {
             <label>Description</label>
             <textarea value={description} onChange={(event) => setDescription(event.target.value)} />
         </div>
-        <button type="submit">
-            {props.buttonLabel || 'Submit'}
-        </button>
+        <LoadingButtons type="submit" loading={props.loading}> </LoadingButtons>
     </form>;
 }
