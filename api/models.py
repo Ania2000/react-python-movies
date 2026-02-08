@@ -18,6 +18,8 @@ class Movie(BaseModel):
     actors = ManyToManyField(Actor, backref='movies')
 
 ActorMovie = Movie.actors.get_through_model()
+ 
+ 
 
 db.connect()
 db.create_tables([Actor, Movie, ActorMovie])

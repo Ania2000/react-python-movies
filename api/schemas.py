@@ -16,6 +16,7 @@ class ActorBase(BaseModel):
     surname: str
 
 
+
 class ActorCreate(ActorBase):
     pass
 
